@@ -115,7 +115,6 @@ int	ft_putnbr_X(unsigned int n)
 // {
 // 	int n = -4294967295;
 // 	int a;
-
 // 	a = ft_putnbr_X(n);
 // 	write(1, "\n", 1);
 // 	ft_putnbr_X(a);
