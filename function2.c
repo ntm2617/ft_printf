@@ -54,7 +54,6 @@ int	ft_p(void *p)
 // {
 // 	int a = 2297;
 // 	int b;
-
 // 	// ft_p(&a);
 // 	b = ft_p(&a);
 // 	printf("\n%p\n", &a);
