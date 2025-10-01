@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   change.c                                           :+:      :+:    :+:   */
+/*   function1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nkarnpan <nkarnpan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 17:25:30 by marvin            #+#    #+#             */
-/*   Updated: 2025/09/27 17:25:30 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/01 23:35:00 by nkarnpan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putchar(char c)
+int	ft_putchar(int c)
 {
 	write(1, &c, 1);
 	return (1);
 }
 
-int	ft_putstr(char *s)
+int	ft_putstr(const char *s)
 {
 	size_t	i;
 	int		count;
@@ -26,7 +26,10 @@ int	ft_putstr(char *s)
 	i = 0;
 	count = 0;
 	if (s == NULL)
-		return (count);
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
 	while (s[i] != '\0')
 	{
 		write(1, &s[i], 1);
@@ -38,30 +41,29 @@ int	ft_putstr(char *s)
 
 int	ft_putnbr(int n)
 {
-	int		a;
-	int		b;
+	long		a;
+	long		b;
 	int		count;
-
+	long	num;
+	
 	count = 0;
+	num = n;
 	if (n < 0)
 	{
-		write(1, "-", 1);
-		count += 1;
-		n = -n;
+		count += ft_putchar('-');
+		num = -num;
 	}
-	a = n % 10;
-	b = n / 10;
+	a = num % 10;
+	b = num / 10;
 	if (b > 9)
 		count += ft_putnbr(b);
 	else if (b <= 9 && b > 0)
 	{
 		b = b + '0';
-		write(1, &b, 1);
-		count++;
+		count += ft_putchar(b);
 	}
 	a = a + '0';
-	write(1, &a, 1);
-	count++;
+	count += ft_putchar(a);
 	return (count);
 }
 
@@ -79,16 +81,14 @@ int	ft_putnbr_u(unsigned int n)
 	else if (b <= 9 && b > 0)
 	{
 		b = b + '0';
-		write(1, &b, 1);
-		count++;
+		count += ft_putchar(b);
 	}
 	a = a + '0';
-	write(1, &a, 1);
-	count++;
+	count += ft_putchar(a);
 	return (count);
 }
 
-int	ft_putnbr_X(unsigned int n)
+int	ft_putnbr_sx(unsigned int n)
 {
 	unsigned int	a;
 	unsigned int	b;
@@ -98,25 +98,23 @@ int	ft_putnbr_X(unsigned int n)
 	b = n / 16;
 	count = 0;
 	if (b > 15)
-		count += ft_putnbr_X(b);
+		count += ft_putnbr_sx(b);
 	else if (b <= 15 && b > 0)
 	{
 		b = "0123456789ABCDEF"[b];
-		write(1, &b, 1);
-		count++;
+		count += ft_putchar(b);
 	}
 	a = "0123456789ABCDEF"[a];
-	write(1, &a, 1);
-	count++;
+	count += ft_putchar(a);
 	return (count);
 }
 
 // int main()
 // {
-// 	int n = -4294967295;
+// 	int n = -2147483648 ;
 // 	int a;
-// 	a = ft_putnbr_X(n);
+// 	a = ft_putnbr(n);
 // 	write(1, "\n", 1);
-// 	ft_putnbr_X(a);
-// 	printf("\n%X\n", n);
+// 	// ft_putnbr_sx(a);
+// 	// printf("\n%X\n", n);
 // }

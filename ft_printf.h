@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nkarnpan <nkarnpan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 19:23:23 by marvin            #+#    #+#             */
-/*   Updated: 2025/09/26 19:23:23 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/01 23:34:42 by nkarnpan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 # include <stdarg.h>
 # include <unistd.h>
 
-int	ft_putchar(char c);
-int	ft_putstr(char *s);
+int	ft_putchar(int c);
+int	ft_putstr(const char *s);
 int	ft_putnbr(int n);
 int	ft_putnbr_u(unsigned int n);
-int	ft_putnbr_X(unsigned int n);
-int	ft_putnbr_x(unsigned int n);
+int	ft_putnbr_sx(unsigned int n);
+int	ft_putnbr_x(unsigned long n);
 int	ft_p(void *p);
-int	check(char	c, va_list	*ap);
+int	check(char c, va_list ap);
 int	ft_printf(const char	*format, ...);
 
 #endif
