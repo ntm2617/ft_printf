@@ -6,7 +6,7 @@
 /*   By: nkarnpan <nkarnpan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 19:22:44 by marvin            #+#    #+#             */
-/*   Updated: 2025/10/01 23:34:24 by nkarnpan         ###   ########.fr       */
+/*   Updated: 2025/10/03 00:02:36 by nkarnpan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,21 @@ int	ft_printf(const char	*format, ...)
 	va_list	ap;
 	int		count;
 
+	if (format == NULL)
+		return (-1);
 	va_start(ap, format);
 	count = 0;
 	while (*format != '\0')
 	{
 		if (*format == '%')
+		{
 			count += check(*(++format), ap);
+			if (check(*format, ap) == 0)
+			{
+				count += ft_putchar('%');
+				count += ft_putchar(*format);
+			}
+		}
 		else
 			count += ft_putchar(*format);
 		format++;
@@ -54,9 +63,14 @@ int	ft_printf(const char	*format, ...)
 	va_end(ap);
 	return (count);
 }
+
 // #include <stdio.h>
 // int main()
 // {
-// 	printf("..NULL %s NULL \n", NULL);
-// 	ft_printf("..NULL %s NULL ", NULL);
+// 	// printf("Real..NULL %rr NULL \n", NULL);
+// 	// ft_printf("Fake..NULL %rr NULL \n", NULL);
+// 	int a = printf(NULL);
+// 	int b= ft_printf(NULL);
+// 	printf("Real>>> %d\n", a);
+// 	printf("Fake>>> %d\n", b);
 // }
