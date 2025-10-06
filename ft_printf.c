@@ -6,7 +6,7 @@
 /*   By: nkarnpan <nkarnpan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 19:22:44 by marvin            #+#    #+#             */
-/*   Updated: 2025/10/03 00:02:36 by nkarnpan         ###   ########.fr       */
+/*   Updated: 2025/10/06 18:08:19 by nkarnpan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int	check(char c, va_list ap)
 		count += ft_putnbr_sx(va_arg(ap, unsigned int));
 	else if (c == '%')
 		count += ft_putchar('%');
+	else
+	{
+		count += write(1, "%", 1);
+		count += write(1, &c, 1);
+	}
 	return (count);
 }
 
@@ -40,7 +45,7 @@ int	ft_printf(const char	*format, ...)
 {
 	va_list	ap;
 	int		count;
-
+	
 	if (format == NULL)
 		return (-1);
 	va_start(ap, format);
@@ -50,11 +55,6 @@ int	ft_printf(const char	*format, ...)
 		if (*format == '%')
 		{
 			count += check(*(++format), ap);
-			if (check(*format, ap) == 0)
-			{
-				count += ft_putchar('%');
-				count += ft_putchar(*format);
-			}
 		}
 		else
 			count += ft_putchar(*format);
